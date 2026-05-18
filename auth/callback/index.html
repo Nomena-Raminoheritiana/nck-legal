@@ -1,1 +1,85 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TikTok Callback</title>
+
+  <style>
+    body{
+      background:#070A12;
+      color:#EEF2FF;
+      font-family:system-ui;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100vh;
+      flex-direction:column;
+    }
+
+    .box{
+      border:1px solid rgba(255,255,255,0.08);
+      padding:20px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      max-width:600px;
+      width:90%;
+    }
+
+    h1{
+      font-size:18px;
+      margin-bottom:10px;
+    }
+
+    pre{
+      color:#9AA4B2;
+      font-size:12px;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .status{
+      margin-top:10px;
+      color:#7C5CFF;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>TikTok Authentication Callback</h1>
+
+  <div class="status">Processing OAuth response...</div>
+
+  <pre id="output"></pre>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const code = params.get("code");
+const state = params.get("state");
+const error = params.get("error");
+
+let result = "";
+
+if(error){
+  result = "❌ Error:\n" + error;
+} else {
+  result =
+`✅ OAuth Success
+
+code: ${code || "missing"}
+state: ${state || "missing"}
+
+Next step:
+→ Exchange code for access_token (backend required)`;
+}
+
+document.getElementById("output").innerText = result;
+</script>
+
+</body>
+</html>
