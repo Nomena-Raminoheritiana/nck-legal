@@ -1,263 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NCK Site Builder</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NCK Site Builder</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-  <style>
-    :root {
-      --bg: #070b14;
-      --panel: rgba(255,255,255,0.06);
-      --text: #eaf0ff;
-      --muted: #9aa4b2;
-      --primary: #7c5cff;
-      --secondary: #00d4ff;
-      --border: rgba(255,255,255,0.08);
-    }
+<style>
+:root{
+  --bg:#070A12;
+  --text:#EEF2FF;
+  --muted:#9AA4B2;
+  --line:rgba(255,255,255,0.08);
+  --card:rgba(255,255,255,0.04);
+  --accent:#7C5CFF;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Inter, sans-serif;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui;
+}
 
-    body {
-      background: radial-gradient(circle at top, #141b2d, var(--bg));
-      color: var(--text);
-      line-height: 1.6;
-    }
+body{
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 20px;
-    }
+/* ================= HEADER ================= */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(7,10,18,0.75);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  z-index:1000;
+}
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 90px 20px 60px;
-    }
+.nav{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  padding:14px 24px;
+}
 
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
+.nav a{
+  margin-left:16px;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:13px;
+}
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 18px;
-    }
+.nav a:hover{color:#fff}
 
-    .subtitle {
-      color: var(--muted);
-      max-width: 780px;
-      margin: 0 auto;
-      font-size: 16px;
-    }
+/* ================= HERO ================= */
+.hero{
+  max-width:1100px;
+  margin:auto;
+  padding:140px 24px 80px;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:40px;
+  align-items:center;
+}
 
-    /* IMAGE HERO */
-    .hero-img {
-      margin-top: 40px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    }
+.hero h1{
+  font-size:58px;
+  letter-spacing:-2px;
+  line-height:1.05;
+}
 
-    .hero-img img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-      display: block;
-    }
+.hero p{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:16px;
+  max-width:600px;
+}
 
-    /* SECTIONS */
-    .section {
-      margin-top: 90px;
-    }
+.hero img{
+  width:100%;
+  border-radius:18px;
+  border:1px solid var(--line);
+}
 
-    .section h2 {
-      font-size: 28px;
-      margin-bottom: 12px;
-    }
+/* ================= SECTION ================= */
+section{
+  padding:80px 0;
+  max-width:1100px;
+  margin:auto;
+}
 
-    .section p.lead {
-      color: var(--muted);
-      max-width: 800px;
-    }
+h2{
+  font-size:34px;
+  margin-bottom:14px;
+  letter-spacing:-1px;
+}
 
-    /* GRID */
-    .grid {
-      margin-top: 30px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
+p{
+  color:var(--muted);
+  max-width:750px;
+}
 
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: 0.25s ease;
-    }
+/* ================= GRID ================= */
+.grid{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(124,92,255,0.5);
-    }
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+}
 
-    .card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
+/* ================= TIMELINE ================= */
+.timeline-wrap{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:40px;
+  align-items:center;
+  margin-top:40px;
+}
 
-    .card-content {
-      padding: 16px;
-    }
+.timeline{
+  border-left:2px solid var(--accent);
+  padding-left:20px;
+}
 
-    .card h3 {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
+.step{
+  margin-bottom:18px;
+}
 
-    .card p {
-      font-size: 13px;
-      color: var(--muted);
-    }
+.timeline-img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid var(--line);
+}
 
-    /* FULL BANNER */
-    .banner {
-      margin-top: 40px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
+/* ================= TABS ================= */
+.tab-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:30px;
+}
 
-    .banner img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-    }
+.tab-buttons button{
+  padding:8px 12px;
+  background:none;
+  border:1px solid var(--line);
+  color:var(--muted);
+  border-radius:8px;
+  cursor:pointer;
+}
 
-    /* FOOTER */
-    footer {
-      margin-top: 100px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-    }
+.tab-buttons button.active{
+  border-color:var(--accent);
+  color:#fff;
+}
 
-    @media (max-width: 900px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
+.tab-content{
+  margin-top:20px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--card);
+}
 
-      h1 {
-        font-size: 34px;
-      }
-    }
-  </style>
+.tab-rich{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  align-items:center;
+}
+
+.tab-rich img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid var(--line);
+}
+
+/* ================= CAROUSEL ================= */
+.carousel{
+  margin-top:40px;
+  display:flex;
+  overflow-x:auto;
+  gap:16px;
+  scroll-snap-type:x mandatory;
+}
+
+.carousel::-webkit-scrollbar{display:none;}
+
+.slide{
+  min-width:320px;
+  scroll-snap-align:start;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--card);
+}
+
+.slide img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.slide div{
+  padding:14px;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  margin-top:80px;
+  padding:60px 24px;
+  border-top:1px solid var(--line);
+  text-align:center;
+  color:var(--muted);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .tab-rich{grid-template-columns:1fr}
+  .timeline-wrap{grid-template-columns:1fr}
+  .hero h1{font-size:38px}
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <div><strong>NCK Builder</strong></div>
+    <div>
+      <a href="#features">Features</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#system">System</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</header>
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="badge">NCK SITE BUILDER PLATFORM</div>
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h1>Build structured digital systems, not websites.</h1>
+    <p>
+      NCK Site Builder is a modular visual development engine that transforms UI components into scalable systems,
+      automation pipelines and integration-ready products.
+    </p>
+  </div>
 
-      <h1>Build Modern Websites. Visually. Intelligently.</h1>
+  <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=80"/>
+</div>
 
-      <p class="subtitle">
-        NCK Site Builder is a modular visual development platform that transforms structured UI blocks into scalable web experiences.
-        Designed for automation, extensibility, and external integrations like TikTok.
-      </p>
+<!-- FEATURES -->
+<section id="features" style="padding-left:32px; padding-right:32px">
+  <h2>Core capabilities</h2>
 
-      <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=80" />
-      </div>
+  <div class="grid">
+    <div class="card">
+      <h3>Component Engine</h3>
+      <p>Reusable UI blocks as structured primitives.</p>
     </div>
 
-    <!-- FEATURES -->
-    <div class="section">
-      <h2>Powerful Visual Development System</h2>
-      <p class="lead">
-        A new way to build websites: modular, structured, and automation-ready.
-      </p>
-
-      <div class="grid">
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1000&q=80"/>
-          <div class="card-content">
-            <h3>Visual Builder Engine</h3>
-            <p>Create layouts using reusable UI blocks with full control over structure.</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1000&q=80"/>
-          <div class="card-content">
-            <h3>Component Architecture</h3>
-            <p>Every section is a reusable module designed for scalability.</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80"/>
-          <div class="card-content">
-            <h3>Automation Layer</h3>
-            <p>Convert UI structures into exportable formats for external systems.</p>
-          </div>
-        </div>
-
-      </div>
+    <div class="card">
+      <h3>Rendering Engine</h3>
+      <p>Dynamic UI generation from structured schemas.</p>
     </div>
 
-    <!-- BANNER -->
-    <div class="section">
-      <h2>Designed for Modern Digital Products</h2>
+    <div class="card">
+      <h3>Automation Layer</h3>
+      <p>Transforms UI into executable workflows.</p>
+    </div>
+  </div>
+</section>
 
-      <div class="banner">
-        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1600&q=80"/>
-      </div>
+<!-- WORKFLOW -->
+<section id="workflow" style="padding-left:32px; padding-right:32px">
+  <h2>How the system works</h2>
 
-      <p class="lead" style="margin-top:20px;">
-        From SaaS platforms to social media integrations, NCK Site Builder bridges the gap between design systems and automation pipelines.
-      </p>
+  <div class="timeline-wrap">
+
+    <div class="timeline">
+      <div class="step"><h3>UI Selection</h3><p>Blocks are chosen inside builder.</p></div>
+      <div class="step"><h3>Schema Build</h3><p>Converted into structured JSON.</p></div>
+      <div class="step"><h3>Render Engine</h3><p>UI is generated dynamically.</p></div>
+      <div class="step"><h3>Export Layer</h3><p>Ready for APIs or media export.</p></div>
+      <div class="step"><h3>Publish</h3><p>Send to TikTok or web platforms.</p></div>
     </div>
 
-    <!-- INTEGRATION -->
-    <div class="section">
-      <h2>Integration Ready Architecture</h2>
-      <p class="lead">
-        Built to connect with external APIs like TikTok, enabling structured UI content to be transformed into publishable media assets.
-      </p>
-
-      <div class="banner">
-        <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=1600&q=80"/>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-      © NCK Site Builder — Visual Development & Automation Platform
-    </footer>
+    <img class="timeline-img"
+      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80"/>
 
   </div>
+</section>
+
+<!-- SYSTEM -->
+<section id="system" style="padding-left:32px; padding-right:32px">
+  <h2>System architecture</h2>
+
+  <div class="tab-buttons">
+    <button class="active" data-tab="1">Frontend</button>
+    <button data-tab="2">Engine</button>
+    <button data-tab="3">Integration</button>
+  </div>
+
+  <div class="tab-content" id="tab1">
+    <div class="tab-rich">
+      <div>
+        <h3>Frontend Layer</h3>
+        <p>Responsible for rendering structured UI blocks into interactive interfaces.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80"/>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab2" style="display:none;">
+    <div class="tab-rich">
+      <div>
+        <h3>Core Engine</h3>
+        <p>Transforms configuration into deterministic UI trees and system logic.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80"/>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab3" style="display:none;">
+    <div class="tab-rich">
+      <div>
+        <h3>Integration Layer</h3>
+        <p>Connects TikTok, APIs and external systems via structured pipelines.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&q=80"/>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="padding-left:32px; padding-right:32px">
+  <h2>Design system gallery</h2>
+
+  <div class="carousel">
+
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80"/>
+      <div><strong>Data-driven UI</strong><br/>Structured rendering system.</div>
+    </div>
+
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1000&q=80"/>
+      <div><strong>Component system</strong><br/>Reusable modular architecture.</div>
+    </div>
+
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1000&q=80"/>
+      <div><strong>Visual builder</strong><br/>Drag & structure interface.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding-left:32px; padding-right:32px">
+  <h2>FAQ</h2>
+
+  <div class="card" style="margin-top:20px; cursor:pointer;" class="faq-item">
+    <strong>Is it a website builder?</strong>
+    <p style="display:none;">No, it is a system-level UI architecture platform.</p>
+  </div>
+
+  <div class="card" style="margin-top:10px; cursor:pointer;">
+    <strong>Can it integrate TikTok?</strong>
+    <p style="display:none;">Yes, via structured export pipelines.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <a href="/terms">Terms</a> ·
+    <a href="/privacy">Privacy</a>
+  </p>
+  <p style="margin-top:20px;">© 2026 NCK Site Builder</p>
+</footer>
+
+<script>
+// TABS
+$(".tab-buttons button").click(function(){
+  $(".tab-buttons button").removeClass("active");
+  $(this).addClass("active");
+
+  let tab = $(this).data("tab");
+
+  $(".tab-content").hide();
+  $("#tab"+tab).show();
+});
+
+// FAQ
+$(".card").click(function(){
+  $(this).find("p").slideToggle(200);
+});
+</script>
 
 </body>
 </html>
